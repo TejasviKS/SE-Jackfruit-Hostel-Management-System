@@ -68,14 +68,14 @@
 **Owner: P3 (Fee Management)**
 
 ## 2.1 Product Perspective
-- State this is a new, self-contained, standalone web application — not a follow-on to an existing
-  system.
-- One or two lines on where it fits: a mini-project for the SE course, not a component of a larger
-  product.
+The Hostel Management System is a new, self-contained, standalone web application
+developed specifically for this course project. It is not a follow-on to, or
+replacement of, any existing production system, and it does not integrate with any
+larger institutional system. It is being built as a mini-project for the Software
+Engineering course (UE24CS341A) and is scoped as a demonstration system, not a
+production deployment.
 
 ## 2.2 Product Functions
-High-level one-line summary of each of the 4 owned features (details in Section 5 — keep this
-short):
 - Student registration, login, and profile management
 - Room and block setup, and room allocation/deallocation
 - Fee structure setup and payment record tracking
@@ -90,21 +90,27 @@ short):
 *(Only two user classes.)*
 
 ## 2.4 Operating Environment
-- OS/platform (web app, target browsers), backend framework (Django/Flask), DB
-  (<PostgreSQL/MySQL/SQLite — One of them to be chosen later>), deployment target (local/Docker/cloud).
+The system is a web application accessed through any modern browser (Chrome,
+Firefox, Edge). It is built using Python 3.x with the Django web framework, and
+uses PostgreSQL as the backend database. It is developed and demonstrated locally (and later via Docker), with no additional client-side installation required beyond a
+browser.
 
 ## 2.5 Design and Implementation Constraints
-- Must be built using Python (Django or Flask) per course-assigned tech stack.
-- Single hostel/single campus scope (no multi-hostel support).
-- Two roles only: Student, Admin. No payment gateway integration — fee payments are
-  admin-recorded entries, not processed transactions.
-- Agile/Scrum methodology mandatory; GitHub used for backlog and PRs.
+- Must be built using Python (Django), per the team's chosen tech stack.
+- Single hostel/single campus scope — no multi-hostel support.
+- Two user roles only: Student and Admin. No payment gateway integration — fee
+  payments are admin-recorded entries, not processed transactions.
+- Agile/Scrum methodology mandatory; GitHub used for backlog, issues, and pull
+  requests, with CI running tests on every PR
 
 ## 2.6 Assumptions and Dependencies
-- Assumes an admin verifies new student accounts before room allocation.
-- Assumes fee payments happen outside the system (cash/bank transfer) and are simply **recorded**
-  by the admin — the system does not process or authorize any payment itself.
-- Any third-party libraries/components you plan to depend on.
+- Assumes an admin verifies new student accounts before a room can be allocated to
+  them.
+- Assumes fee payments happen outside the system (cash/bank transfer) and are
+  simply recorded by the admin — the system does not process, authorize, or
+  validate any actual payment transaction.
+- Depends on Django's built-in authentication and ORM; no other major third-party
+  service is required for this scope.
 
 ---
 

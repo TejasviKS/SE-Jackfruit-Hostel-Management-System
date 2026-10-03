@@ -224,24 +224,33 @@ receipts). **Priority: High.**
 ---
 
 ## 5.4 Complaints & Leave Management
+
 **Owner: P4**
 
 ### Description and Priority
-Maintenance complaint filing/tracking, and student leave/outing request with admin approval.
+
+This module allows students to submit and track maintenance complaints related to their allocated room. It also allows students to submit leave or outing requests for a specified date range. The Admin can view submitted complaints, update their status, and approve or reject student leave requests.
+
 **Priority: Medium** — supporting operational features.
 
 ### Stimulus/Response Sequences
-- *"Student files a complaint → complaint enters 'Open' → admin updates status to
-  'In-progress'/'Resolved' → student sees updated status."*
-- *"Student submits a leave request → admin approves/rejects → student sees the decision."*
+
+**Complaint Submission:**
+
+Student submits a maintenance complaint → system validates the complaint details → complaint is created with status `Open` → Admin can view the complaint → Admin updates the complaint status to `In-progress` or `Resolved` → student can view the updated status.
+
+**Leave Request Submission:**
+
+Student submits a leave/outing request with the required date range and reason → system validates the request → leave request is created with status `Pending` → Admin reviews the request → Admin approves or rejects the request → student can view the decision.
 
 ### Functional Requirements
-| ID | Requirement | Priority | Verification |
-|---|---|---|---|
-| REQ-17 | The system shall allow a student to file a maintenance complaint tied to their room. | High | Functional test |
-| REQ-18 | The system shall allow an admin to update complaint status (Open/In-progress/Resolved). | High | Functional test |
-| REQ-19 | The system shall allow a student to submit a leave/outing request with a date range. | High | Functional test |
-| REQ-20 | The system shall allow an admin to approve or reject a leave request. | High | Functional test |
+
+| **ID** | **Requirement**                                                                                       | **Priority** | **Verification** |
+| ------ | ----------------------------------------------------------------------------------------------------- | ------------ | ---------------- |
+| REQ-17 | The system shall allow a student to file a maintenance complaint tied to their allocated room.        | High         | Functional test  |
+| REQ-18 | The system shall allow an admin to update complaint status as `Open`, `In-progress`, or `Resolved`.   | High         | Functional test  |
+| REQ-19 | The system shall allow a student to submit a leave/outing request with a valid date range and reason. | High         | Functional test  |
+| REQ-20 | The system shall allow an admin to approve or reject a pending leave request.                         | High         | Functional test  |
 
 ---
 
@@ -264,8 +273,20 @@ Maintenance complaint filing/tracking, and student leave/outing request with adm
 
 
 ## 6.4 Software Quality Attributes
-- Pick 2–3 and make them specific: Usability, Reliability (invalid input must never crash the
-  system), Maintainability (business logic separated into modules with unit tests).
+
+### Usability
+- The system shall provide clear labels, instructions, and validation messages for student and admin actions.
+- Students shall be able to submit complaints and leave requests without requiring technical knowledge.
+- Complaint and leave request statuses shall be displayed clearly to the respective student.
+
+### Reliability
+- Invalid or incomplete complaint and leave request submissions shall be rejected with an appropriate error message.
+- A failed submission shall not create an incomplete or inconsistent record in the database.
+- The system shall preserve the status of complaints and leave requests once they are successfully recorded.
+
+### Maintainability
+- The system shall separate business logic, data models, and user-interface components to facilitate maintenance.
+- Important business rules shall be covered by appropriate software tests.
 
 ## 6.5 Business Rules
 - *"Only verified students can be allocated a room."*
@@ -273,6 +294,13 @@ Maintenance complaint filing/tracking, and student leave/outing request with adm
 - *"Only an admin can approve or reject a leave request."*
 - *"A recorded payment cannot exceed a student's outstanding fee balance."*
 - *"Only an admin can allocate or deallocate a room."*
+- * *"Only a student with an allocated room can submit a maintenance complaint."*
+- *"A newly submitted complaint shall have the status 'Open'."*
+- *"Only an admin can update the status of a complaint."*
+- *"A newly submitted leave request shall have the status 'Pending'."*
+- *"Only an admin can approve or reject a leave request."*
+- *"A student can view only their own complaints and leave requests."*
+
 
 ---
 
@@ -283,24 +311,24 @@ Maintenance complaint filing/tracking, and student leave/outing request with adm
   applicable" is fine if there's genuinely nothing extra.
 
 ---
-
 ## Appendix A: Glossary
+
 **Owner: P4**
 
-Define every term used across the document — check with all teammates for terms that need
-defining.
+Define every term used across the document — check with all teammates for terms that need defining.
 
-| Term | Definition |
-|---|---|
-| Student | A registered user who lives in or has applied to live in the hostel. |
-| Admin | A privileged user who manages rooms, fees, complaints, and leave requests. |
-| Room | A physical hostel room with a defined capacity, belonging to a block. |
-| Block | A group of rooms (e.g. a building or wing) within the hostel. |
-| Fee | The amount due from a student for their hostel stay. |
-| PaymentRecord | An admin-entered record of an amount paid by a student toward their fee. |
-| Complaint | A maintenance/issue report filed by a student against their room. |
-| LeaveRequest | A student's request to be away from the hostel for a date range. |
-| RBAC | Role-Based Access Control — restricting actions based on user role (Student/Admin). |
+| Term          | Definition                                                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Student       | A registered user who lives in or has applied to live in the hostel.                                               |
+| Admin         | A privileged user who manages rooms, fees, complaints, and leave requests.                                         |
+| Room          | A physical hostel room with a defined capacity, belonging to a block.                                              |
+| Block         | A group of rooms (e.g. a building or wing) within the hostel.                                                      |
+| Fee           | The amount due from a student for their hostel stay.                                                               |
+| PaymentRecord | An admin-entered record of an amount paid by a student toward their fee.                                           |
+| Complaint     | A maintenance issue reported by a student for their allocated room and tracked by the system until it is resolved. |
+| LeaveRequest  | A request submitted by a student to obtain permission for leave or outing for a specified date range.              |
+| RBAC          | Role-Based Access Control — restricting actions based on user role (Student/Admin).                                |
+
 
 
 ## Appendix B: Field Layouts
@@ -319,6 +347,29 @@ Document exact field layouts for key entities once finalized, e.g.:
 | payment_date | 8 | Date | Date the payment was recorded | Y |
 | complaint_status | 20 | Enum/String | Open / In-progress / Resolved | Y |
 | leave_status | 20 | Enum/String | Pending / Approved / Rejected | Y |
+
+### Complaint
+
+| Field              | Type        | Description                                           | Mandatory |
+| ------------------ | ----------- | ----------------------------------------------------- | --------- |
+| `complaint_id`     | UUID/String | Unique identifier for the complaint                   | Yes       |
+| `student_id`       | UUID/String | Identifier of the student who submitted the complaint | Yes       |
+| `room_id`          | UUID/String | Identifier of the room associated with the complaint  | Yes       |
+| `description`      | Text        | Description of the maintenance issue                  | Yes       |
+| `complaint_status` | Enum/String | Current status: `Open`, `In-progress`, or `Resolved`  | Yes       |
+| `created_at`       | DateTime    | Date and time when the complaint was created          | Yes       |
+
+### LeaveRequest
+
+| Field              | Type        | Description                                          | Mandatory |
+| ------------------ | ----------- | ---------------------------------------------------- | --------- |
+| `leave_request_id` | UUID/String | Unique identifier for the leave request              | Yes       |
+| `student_id`       | UUID/String | Identifier of the student submitting the request     | Yes       |
+| `start_date`       | Date        | Start date of the leave/outing period                | Yes       |
+| `end_date`         | Date        | End date of the leave/outing period                  | Yes       |
+| `reason`           | Text        | Reason provided by the student for the leave request | Yes       |
+| `leave_status`     | Enum/String | Current status: `Pending`, `Approved`, or `Rejected` | Yes       |
+| `created_at`       | DateTime    | Date and time when the leave request was created     | Yes       |
 
 
 ## Appendix C: Requirement Traceability Matrix

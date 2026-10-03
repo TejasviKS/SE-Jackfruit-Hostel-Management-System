@@ -8,7 +8,7 @@
 ### Hostel Management System
 
 **Version 1.0**
-**Prepared by:** <Member 1 Tejasvi K S – PES1UG24CS499> / <Member 2 Prathiksha – SRN> / <Member 3 Vilohith – PES1UG24CS535> / <Member 4 Varsha – SRN>
+**Prepared by:** <Member 1 Tejasvi K S – PES1UG24CS499> / <Member 2 Prathiksha B P – PES1UG24CS925> / <Member 3 Vilohith – PES1UG24CS535> / <Member 4 Varsha – SRN>
 **Group Number:** <G-03>  |  **Project ID:** <HMS-2026-XX>
 **Course:** UE24CS341A – Software Engineering, V Semester
 **Organization:** PES University, Bangalore — Dept. of CSE
@@ -117,23 +117,106 @@ The system is a web application accessed through any modern browser (Chrome, Fir
 
 ## 3.1 User Interfaces
 
-* Describe main screens: Student dashboard, Room/allocation screen, Fee details screen, Complaint/Leave screen, Admin dashboard.
-* Formatting conventions to keep consistent across the app (error message style, status badges, form validation messages).
-* Optional: a simple text/wireframe mock-up of one key screen.
+The system is accessed through a browser-based interface. All screens share the same layout: a top bar with the system name and the logged-in user, a left navigation menu that shows only the pages permitted for the user's role, and a main content area. The figures in this section are UI prototypes of the planned screens; the implemented screens may differ in minor styling.
+
+**Formatting conventions** used consistently across all screens:
+
+* Room status is shown as a coloured badge: green "Vacant" and red "Occupied". A room whose occupancy equals its capacity is shown as "Occupied"; otherwise it is "Vacant".
+* Occupancy is displayed as "current / capacity" (for example, "1 / 2").
+* Complaint and leave statuses are also shown as badges: Open (red), In-progress (blue), Resolved (green); Pending (amber), Approved (green), Rejected (red).
+* Form validation errors are displayed in red text directly below the field that caused them, and the field is outlined in red.
+* Success and failure messages for actions are displayed in a green or red banner at the top of the page.
+* Admin-only screens and actions are not shown to Student users.
+
+### 3.1.1 Student Dashboard
+
+The landing page for a logged-in student. It summarises the student's allocated room, outstanding fee, open complaints, and leave requests, and shows the student's profile.
+
+![Student Dashboard](diagrams/ui/student_dashboard.png)
+
+*Figure 3.1 – Student Dashboard.*
+
+### 3.1.2 My Room (Student)
+
+A read-only view of the student's allocated block, room number, room type, capacity, occupancy, and status. If no room is allocated, the screen displays "No room allocated yet."
+
+![My Room](diagrams/ui/student_my_room.png)
+
+*Figure 3.2 – My Room screen.*
+
+### 3.1.3 Admin Dashboard
+
+The landing page for the admin. It shows summary counts and the list of pending student registrations, which the admin can approve or reject.
+
+![Admin Dashboard](diagrams/ui/admin_dashboard.png)
+
+*Figure 3.3 – Admin Dashboard.*
+
+### 3.1.4 Rooms & Blocks (Admin)
+
+Lists all rooms with block, type, capacity, occupancy, and status, and provides a form to add or edit a room or block. The figure shows a success banner and a validation error on the Capacity field.
+
+![Rooms and Blocks](diagrams/ui/admin_rooms.png)
+
+*Figure 3.4 – Rooms & Blocks screen.*
+
+### 3.1.5 Room Allocation (Admin)
+
+Allows the admin to select a verified student and a room and to allocate or deallocate. An attempt to allocate a room that is already at capacity is rejected with an error message and no allocation is made.
+
+![Room Allocation](diagrams/ui/admin_allocation.png)
+
+*Figure 3.5 – Room Allocation screen showing a "room is full" error.*
+
+### 3.1.6 Fee Details (Student)
+
+Shows the student's fee amount, total paid, outstanding balance, and payment history.
+
+![Fee Details](diagrams/ui/student_fees.png)
+
+*Figure 3.6 – Fee Details screen (Student).*
+
+### 3.1.7 Fees (Admin)
+
+Allows the admin to record a payment entry for a student and to view outstanding dues across all students. A payment that exceeds the outstanding balance is rejected with an error.
+
+![Fees](diagrams/ui/admin_fees.png)
+
+*Figure 3.7 – Fees screen (Admin).*
+
+### 3.1.8 Complaints & Leave (Student)
+
+Allows the student to submit a maintenance complaint for their allocated room and a leave request with a date range and reason, and to track the status of each.
+
+![Complaints and Leave](diagrams/ui/student_complaints_leave.png)
+
+*Figure 3.8 – Complaints & Leave screen (Student).*
+
+### 3.1.9 Complaints & Leave Requests (Admin)
+
+Allows the admin to update the status of complaints and to approve or reject pending leave requests.
+
+![Admin Complaints and Leave](diagrams/ui/admin_complaints_leave.png)
+
+*Figure 3.9 – Complaints & Leave Requests screen (Admin).*
 
 ## 3.2 Software Interfaces
 
-* Backend framework + version, DB engine + version, ORM used (Django ORM).
-* Confirm: no external payment gateway library/SDK is used in this version.
+* **Backend framework:** Django 5.2 (LTS), running on Python 3.x.
+* **Database engine:** PostgreSQL 16, chosen for its relational integrity between the Student, Room, Fee, and related entities.
+* **ORM:** Django ORM is used for all database access; no raw SQL is required for normal operations.
+* **Authentication:** Django's built-in authentication and session framework.
+* No external payment gateway library or SDK is used in this version of the system.
 
 ## 3.3 Communications Interfaces
 
-* REST API / HTTP between frontend and backend if applicable, or plain Django templates (state which architecture your team is using).
-* Email notification interface, if implemented — otherwise state "Not applicable."
+The system uses a server-rendered architecture: Django views render HTML templates and the browser communicates with the server over HTTP (HTTPS in deployment) using standard form submissions. No separate REST API or separate frontend application is used in this version.
+
+Email/SMS notification interface: Not applicable.
 
 ## 3.4 Hardware Interfaces
 
-* Standard: browser + keyboard/mouse only, no special hardware.
+The system requires no special hardware. Users access it through a standard computer or mobile device with a modern web browser, and a keyboard/mouse or touch input.
 
 ---
 
@@ -141,9 +224,21 @@ The system is a web application accessed through any modern browser (Chrome, Fir
 
 **Owner: P2**
 
-* Include a use case diagram covering both actors (Student, Admin) and the use cases listed in Section 5 / the Use Cases table below.
-* Include an ER diagram covering core entities: `Student`, `Room`, `Block`, `Fee`, `PaymentRecord`, `Complaint`, `LeaveRequest`. No `Visitor` entity, no `RoomChangeRequest` entity.
-* Draw.io/PlantUML export as an image, inserted here, is fine.
+## 4.1 Use Case Diagram
+
+The use case diagram below shows the two actors, Student and Admin, and the twelve use cases (UC-01 to UC-12) listed in the Use Cases table at the end of this document. Both actors use UC-01 (Register / Login), since login applies to both roles; registration applies to Students only.
+
+![Use Case Diagram](diagrams/use_case.png)
+
+*Figure 4.1 – Use case diagram of the Hostel Management System.*
+
+## 4.2 ER Diagram
+
+The ER diagram below shows the core entities: Student, Room, Block, Fee, PaymentRecord, Complaint, and LeaveRequest. A Block contains many Rooms. A Room may be allocated to many Students, up to its capacity (REQ-7), and a Student has at most one allocated Room. Each Student has at most one Fee record, which may be set per student or per room type (REQ-11), and many PaymentRecords (REQ-12). The outstanding balance is calculated as the fee amount minus the sum of payment amounts (REQ-13) and is not stored. A Student files Complaints, each tied to a Room (REQ-17), and submits LeaveRequests (REQ-19). Admin users are stored in the same user table as Students, distinguished by the `role` attribute, and are therefore not a separate entity.
+
+![ER Diagram](diagrams/er_diagram.png)
+
+*Figure 4.2 – Entity-relationship diagram of the Hostel Management System.*
 
 ---
 
@@ -187,8 +282,9 @@ Room/block setup, capacity and availability tracking, direct allocation and deal
 
 ### Stimulus/Response Sequences
 
-* *"Admin allocates an available room to a verified student → room status updates to 'Occupied' → student sees their room on their dashboard."*
-* *"Admin deallocates a student from a room (e.g. on checkout) → room status updates to 'Vacant'."*
+* **Allocation:** The Admin selects a verified student and an available room and submits the allocation → the system checks that the room has not reached its capacity → the student is assigned to the room → the room occupancy is updated and its status becomes "Occupied" when full → the student sees the room on their dashboard.
+* **Allocation to a full room:** The Admin attempts to allocate a student to a room that is already at capacity → the system rejects the request → an error message is shown and no allocation is made.
+* **Deallocation:** The Admin deallocates a student from a room (for example, on checkout) → the system removes the allocation → the room occupancy is reduced and its status becomes "Vacant" → the student's dashboard no longer shows a room.
 
 ### Functional Requirements
 

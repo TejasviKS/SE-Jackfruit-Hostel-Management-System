@@ -1,3 +1,4 @@
+
 # Jackfruit Phase-1
 
 ## Software Requirements Specification
@@ -430,3 +431,4 @@ Document exact field layouts for key entities once finalized, e.g.:
 | UC-12       | Approve / Reject Leave      | Admin         | Admin authenticated, pending leave request exists | Leave request status updated                |
 
 ---
+

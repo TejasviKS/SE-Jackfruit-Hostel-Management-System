@@ -294,7 +294,7 @@ Student submits a leave/outing request with the required date range and reason â
 - *"Only an admin can approve or reject a leave request."*
 - *"A recorded payment cannot exceed a student's outstanding fee balance."*
 - *"Only an admin can allocate or deallocate a room."*
-- * *"Only a student with an allocated room can submit a maintenance complaint."*
+- * "Only a student with an allocated room can submit a maintenance complaint."*
 - *"A newly submitted complaint shall have the status 'Open'."*
 - *"Only an admin can update the status of a complaint."*
 - *"A newly submitted leave request shall have the status 'Pending'."*

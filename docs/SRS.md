@@ -497,7 +497,7 @@ Document exact field layouts for key entities once finalized, e.g.:
 ### Fee
 
 | Field        | Type        | Description                                      | Mandatory |
-|--------------|-------------|-------------------------------------------------_|-----------|
+|--------------|-------------|--------------------------------------------------|-----------|
 | `fee_id`     | UUID/String | Unique identifier for the fee record             | Yes       |
 | `student_id` | UUID/String | Identifier of the student this fee applies to    | Yes       |
 | `amount`     | Decimal     | Total fee amount due                             | Yes       |

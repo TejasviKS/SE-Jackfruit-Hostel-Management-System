@@ -289,26 +289,41 @@ Student submits a leave/outing request with the required date range and reason â
 - Important business rules shall be covered by appropriate software tests.
 
 ## 6.5 Business Rules
-- *"Only verified students can be allocated a room."*
-- *"A room cannot be allocated beyond its defined capacity."*
-- *"Only an admin can approve or reject a leave request."*
-- *"A recorded payment cannot exceed a student's outstanding fee balance."*
-- *"Only an admin can allocate or deallocate a room."*
-- * "Only a student with an allocated room can submit a maintenance complaint."*
-- *"A newly submitted complaint shall have the status 'Open'."*
-- *"Only an admin can update the status of a complaint."*
-- *"A newly submitted leave request shall have the status 'Pending'."*
-- *"Only an admin can approve or reject a leave request."*
-- *"A student can view only their own complaints and leave requests."*
 
+* "Only verified students can be allocated a room."*
+* "A room cannot be allocated beyond its defined capacity."*
+* "Only an admin can approve or reject a leave request."*
+* "A recorded payment cannot exceed a student's outstanding fee balance."*
+* "Only an admin can allocate or deallocate a room."*
+* "Only a student with an allocated room can submit a maintenance complaint."*
+* "A newly submitted complaint shall have the status 'Open'."*
+* "Only an admin can update the status of a complaint."*
+* "A newly submitted leave request shall have the status 'Pending'."*
+* "A student can view only their own complaints and leave requests."*
 
 ---
 
 # 7. Other Requirements
+
 **Owner: P4**
 
-- Database requirements, legal/data-retention notes, anything else not covered above. "Not
-  applicable" is fine if there's genuinely nothing extra.
+## 7.1 Database Requirements
+
+* The system shall use PostgreSQL as the database management system.
+* The database shall maintain relationships between students, rooms, fees, payments, complaints, and leave requests.
+* Required fields shall not accept null or empty values where the corresponding field is marked mandatory in Appendix B.
+* The database shall maintain data consistency when complaints or leave requests are created or their statuses are updated.
+
+## 7.2 Data Retention and Privacy
+
+* Student information, complaint records, and leave request records shall be accessible only to authorized users according to their roles.
+* The system shall retain complaint and leave request records for the duration required by the project or institutional requirements.
+* The system shall not expose student information to unauthorized users.
+
+## 7.3 Other Requirements
+
+* No external payment gateway is required for this version of the system.
+* No additional hardware or third-party service is required beyond the components specified in this SRS.
 
 ---
 ## Appendix A: Glossary
@@ -397,8 +412,8 @@ Document exact field layouts for key entities once finalized, e.g.:
 | UC-07 | View Fee Details | Student | Logged in | Fee amount + outstanding balance shown |
 | UC-08 | Record Fee Payment | Admin | Admin authenticated | Payment recorded, balance updated |
 | UC-09 | Submit Complaint | Student | Logged in, allocated a room | Complaint created |
-| UC-10 | Manage Complaint Status | Admin | Admin authenticated | Complaint status updated |
-| UC-11 | Submit Leave Request | Student | Logged in | Leave request created |
-| UC-12 | Approve / Reject Leave | Admin | Admin authenticated | Leave request status updated |
+| UC-10| Manage Complaint Status | Admin | Admin authenticated, complaint exists | Complaint status updated |
+| UC-11 | Submit Leave Request | Student | Logged in | Leave request created with `Pending` status |
+| UC-12 | Approve / Reject Leave | Admin | Admin authenticated, pending leave request exists | Leave request status updated |
 
 ---

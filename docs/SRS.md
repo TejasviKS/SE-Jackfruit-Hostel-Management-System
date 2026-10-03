@@ -494,6 +494,23 @@ Document exact field layouts for key entities once finalized, e.g.:
 | `leave_status`     | Enum/String | Current status: `Pending`, `Approved`, or `Rejected` | Yes       |
 | `created_at`       | DateTime    | Date and time when the leave request was created     | Yes       |
 
+### Fee
+
+| Field        | Type        | Description                                      | Mandatory |
+|--------------|-------------|-------------------------------------------------_|-----------|
+| `fee_id`     | UUID/String | Unique identifier for the fee record             | Yes       |
+| `student_id` | UUID/String | Identifier of the student this fee applies to    | Yes       |
+| `amount`     | Decimal     | Total fee amount due                             | Yes       |
+
+### PaymentRecord
+
+| Field          | Type        | Description                                              | Mandatory |
+|----------------|-------------|----------------------------------------------------------|-----------|
+| `payment_id`   | UUID/String | Unique identifier for the payment entry                  | Yes       |
+| `student_id`   | UUID/String | Identifier of the student the payment belongs to         | Yes       |
+| `amount`       | Decimal     | Amount recorded in this payment entry                    | Yes       |
+| `payment_date` | Date        | Date the payment was recorded                            | Yes       |
+
 ---
 
 ## Appendix C: Requirement Traceability Matrix

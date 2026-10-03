@@ -5,7 +5,7 @@
 ### Hostel Management System
 
 **Version 1.0**
-**Prepared by:** <Member 1 Tejasvi K S – PES1UG24CS499> / <Member 2 Prathiksha – SRN> / <Member 3 Vilohith – SRN> / <Member 4 Varsha – SRN>
+**Prepared by:** <Member 1 Tejasvi K S – PES1UG24CS499> / <Member 2 Prathiksha – SRN> / <Member 3 Vilohith – PES!UG24CS535> / <Member 4 Varsha – SRN>
 **Group Number:** <G-03>  |  **Project ID:** <HMS-2026-XX>
 **Course:** UE24CS341A – Software Engineering, V Semester
 **Organization:** PES University, Bangalore — Dept. of CSE
@@ -42,27 +42,22 @@
 **Owner: P1 (Student & Access Management)**
 
 ## 1.1 Purpose
-- State what this document is: the SRS for the Hostel Management System, version 1.0.
-- 2–3 lines on what the product is — e.g. *"a web application (Django) that manages student
-  information, hostel room allocation, fee payment records, complaints, and leave requests for a
-  single hostel."*
+The Software Requirements Specification (SRS) defines the functional and nonfunctional requirements for Version 1.0 of the Hostel Management System. The system is a web-based application developed for the Software Engineering course at PES University to manage student information, hostel room allocation, fee payment records, complaints, and leave requests for a single hostel. The system provides separate functionality for Student and Admin users.
 
 ## 1.2 Intended Audience and Reading Suggestions
-- Readers: your team (developers), subject teacher/evaluator, testers.
-- One line on how the rest of the SRS is organized (Overall Description → Interfaces → Analysis
-  Models → System Features → Nonfunctional Requirements → Appendices).
+This document is intended for the Hostel Management System development team, the Software Engineering course teacher/evaluator, and testers responsible for verifying the system. The SRS is organized into the Introduction, Overall Description, External Interface Requirements, Analysis Models, System Features, Other Nonfunctional Requirements, Other Requirements, and Appendices.
 
 ## 1.3 Product Scope
-- Short paragraph: what the software does, who it's for, and why — e.g. replacing a manual
-  register/notebook system for room allocation and fee tracking with a single web application.
-- Explicitly note: two user roles only (Student, Admin); 
+The Hostel Management System is intended to replace manual register- and notebook-based management of student information, hostel room allocation, fee records, complaints, and leave requests with a centralized web application. The system is intended for students and administrators managing a single hostel. It supports two user roles only: Student and Admin. The Student can manage their profile, view room and fee information, submit complaints, and submit leave requests, while the Admin can manage student accounts, rooms, room allocation, fee records, complaints, and leave requests. The system does not include a Warden role, visitor management, a room-change request workflow, online payment gateway integration, receipt/PDF generation, or multi-hostel management.
 
 ## 1.4 References
-- Course guidelines document (Jackfruit — SE Project Guidelines 2026).
-- Django/Flask documentation, if referenced for design constraints.
-- If nothing else, write "Not applicable" — don't leave blank.
+The following references were used in preparing this Software Requirements Specification:
 
----
+1. Jackfruit — Software Engineering Project Guidelines 2026.
+2. Django Documentation — documentation for the Django web framework used by the project.
+3. PostgreSQL Documentation — documentation for the PostgreSQL database management system used by the project.
+
+
 
 # 2. Overall Description
 **Owner: P3 (Fee Management)**

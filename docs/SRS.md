@@ -471,6 +471,17 @@ Document exact field layouts for key entities once finalized, e.g.:
 | complaint_status | 20     | Enum/String | Open / In-progress / Resolved             | Y         |
 | leave_status     | 20     | Enum/String | Pending / Approved / Rejected             | Y         |
 
+### Student
+
+| Field | Type | Description | Mandatory |
+|---|---|---|---|
+| `student_id` | UUID/String | Unique identifier for the student | Yes |
+| `name` | String | Full name of the student | Yes |
+| `email` | String | Unique login email / SRN | Yes |
+| `guardian_contact` | String | Parent/guardian contact number | Yes |
+| `registration_status` | Enum/String | `Pending` or `Verified` | Yes |
+| `created_at` | DateTime | Date and time the account was registered | Yes |
+
 ### Complaint
 
 | Field              | Type        | Description                                           | Mandatory |

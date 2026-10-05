@@ -1,4 +1,3 @@
-
 # Jackfruit Phase-1
 
 ## Software Requirements Specification
@@ -360,20 +359,20 @@ Student submits a leave/outing request with the required date range and reason â
 
 ## 6.1 Performance Requirements
 
-* The performance requirements will be finalized during the design phase.
+* **NFR-1:** The system shall respond to standard page requests (dashboard, room list, fee view) within 2 seconds under normal single-user load, verified by manual timing during testing.
 
 ## 6.2 Safety Requirements
 
-* The safety requirements will be finalized during the design phase.
+* Not applicable â€” the system does not control any safety-critical hardware or process, and no physical harm can result from a failure of the system.
 
 ## 6.3 Security Requirements
 
-| ID    | Security Requirement                                                              | Validation Approach     |
-| ----- | --------------------------------------------------------------------------------- | ----------------------- |
-| SEC-1 | Passwords shall not be stored in plaintext.                                       | Code/config review      |
-| SEC-2 | Role-based access shall prevent students from accessing admin-only endpoints.     | Authorization tests     |
-| SEC-3 | The system shall validate and sanitize all user-supplied input before processing. | Negative/security tests |
-| SEC-4 | Authenticated APIs shall reject expired/invalid session tokens.                   | Security test           |
+| ID    | Security Requirement                                                                                                                 | Validation Approach     |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
+| SEC-1 | Passwords shall not be stored in plaintext.                                                                                          | Code/config review      |
+| SEC-2 | Role-based access shall prevent students from accessing admin-only endpoints.                                                        | Authorization tests     |
+| SEC-3 | The system shall validate and sanitize all user-supplied input before processing.                                                    | Negative/security tests |
+| SEC-4 | The system shall invalidate a user's session after logout or expiry, and reject any request made with an invalid or expired session. | Security test           |
 
 ## 6.4 Software Quality Attributes
 
@@ -555,4 +554,3 @@ Document exact field layouts for key entities once finalized, e.g.:
 | UC-12       | Approve / Reject Leave      | Admin         | Admin authenticated, pending leave request exists | Leave request status updated                |
 
 ---
-

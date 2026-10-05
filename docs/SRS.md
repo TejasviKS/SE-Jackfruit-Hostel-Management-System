@@ -481,6 +481,24 @@ Document exact field layouts for key entities once finalized, e.g.:
 | `registration_status` | Enum/String | `Pending` or `Verified` | Yes |
 | `created_at` | DateTime | Date and time the account was registered | Yes |
 
+### Block
+
+| Field      | Type        | Description                     | Mandatory |
+| ---------- | ----------- | ------------------------------- | --------- |
+| `block_id` | UUID/String | Unique identifier for the block | Yes       |
+| `name`     | String      | Block/building name             | Yes       |
+
+### Room
+
+| Field         | Type        | Description                                              | Mandatory |
+| ------------- | ----------- | -------------------------------------------------------- | --------- |
+| `room_id`     | UUID/String | Unique identifier for the room                           | Yes       |
+| `block_id`    | UUID/String | Identifier of the block this room belongs to             | Yes       |
+| `room_number` | String      | Room number/label                                        | Yes       |
+| `capacity`    | Integer     | Maximum number of students the room can hold (minimum 1) | Yes       |
+| `room_status` | Enum/String | Current status: `Vacant` or `Occupied`                   | Yes       |
+
+
 ### Complaint
 
 | Field              | Type        | Description                                           | Mandatory |
